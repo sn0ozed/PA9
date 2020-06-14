@@ -9,6 +9,9 @@
 
 // Comments: All the auto functions and variables definedd outside the scope of main need to be defined in a class called TetrisGame
 
+
+//test edit
+
 #include <SFML/Graphics.hpp>
 using namespace std;
 using namespace sf;
@@ -122,7 +125,7 @@ int main(void)
 					world[cy + y][cx + x] = blockShape + 1; // +! is for avoidin zero
 				}
 
-				clearLine();
+			//	clearLine();
 				//start new block
 				newBlock();
 				return false;
