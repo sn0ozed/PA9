@@ -1,2 +1,0 @@
-﻿  main.cpp
-C:\SCHOOL\CPTS 122\Programming Assignments\PA9 CPTS122\PA9 Tetris\main.cpp(1,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
