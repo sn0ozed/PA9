@@ -41,26 +41,37 @@ public:
 
 		while (window.isOpen())
 		{
-			tick();
-			input();
-
-			window.clear(Color::White);
-
-			drawWorld();
-			drawBlock();
-			drawPoints();
-
-			/*if (cy == 0)
+			if (GameOver == 0)
 			{
+				tick();
+				input();
+
+				window.clear(Color::White);
+
+				drawWorld();
+				drawBlock();
+				drawPoints();
+
+				window.display();
+			}
+			else if (GameOver == 1)
+			{
+				input();
+
+				window.clear(Color::White);
+
+				drawPoints();
+				drawWorld();
+
 				game_over.setString("Game Over");
 				game_over.setCharacterSize(40);
 				game_over.setFillColor(Color::Red);
-				game_over.setPosition(Vector2f(10, 50));
+				game_over.setPosition(Vector2f(80, 630));
 
 				window.draw(game_over);
-			}*/
 
-			window.display();
+				window.display();
+			}
 		}
 	}
 

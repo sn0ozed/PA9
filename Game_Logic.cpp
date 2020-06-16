@@ -32,6 +32,9 @@ void Game_Logic::clearLine()
 		{
 			for (int x = 0; x < widthCount; x++)world[to][x] = world[from][x];
 			to--;
+
+			if (cy == 0)
+				GameOver = 1;
 		}
 		//otherwise clear the line
 	}

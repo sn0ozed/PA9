@@ -25,6 +25,7 @@ protected:
 	int cx; // current x position of block
 	int cy; //current y position of the block
 	int point_num; //curretn number of points
+	int GameOver;
 	float dur; //duration for block to fall
 
 	int tetrisBlock[7][4][4] =
@@ -72,6 +73,7 @@ public:
 	{
 		newBlock();
 		point_num = 0;
+		GameOver = 0;
 		dur = 0.5;
 	}
 
