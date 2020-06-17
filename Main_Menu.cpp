@@ -224,7 +224,7 @@ void Main_Menu::joinMenu()
 	enteredH.setFont(font);
 	enteredP.setFont(font);
 
-	host_address.setString("Enter Host Adress to Join");
+	host_address.setString("Enter Host Address to Join");
 	port_num.setString("Enter Port");
 	enteredH.setString("");
 	enteredP.setString("");
