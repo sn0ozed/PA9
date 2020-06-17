@@ -73,3 +73,8 @@ void Game_Logic::rotateBlock()
 	for (int y = 0; y < 4; y++)for (int x = 0; x < 4; x++)
 		tetrisBlock[blockShape][y][x] = d[y][x];
 }
+
+int Game_Logic::getPoints()
+{
+	return point_num;
+}

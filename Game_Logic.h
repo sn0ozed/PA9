@@ -88,12 +88,13 @@ public:
 
 	//memeber functions
 
-	virtual void newBlock();
-	virtual bool checkBlock();
-	virtual void clearLine();
-	virtual bool fallDown();
-	virtual void rotateBlock();
+	void newBlock();
+	bool checkBlock();
+	void clearLine();
+	bool fallDown();
+	void rotateBlock();
 
+	virtual int getPoints();
 
 
 };
