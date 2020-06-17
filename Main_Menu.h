@@ -2,8 +2,12 @@
 #define MAIN_MENU_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
+#include <iostream>
+
 
 using namespace sf;
+using namespace std;
 
 class Main_Menu
 {
@@ -17,12 +21,13 @@ protected:
 	Sprite S1;
 	Font font;
 	Text singlePlayer, multiPlayer, exit;
+	string host_ad, client_ad;
+	unsigned short port;
 
 public:
 	Main_Menu()
 	{
 		menu_sel = 0;
-		window.create(VideoMode(900, 700), "TETRIS");
 		font.loadFromFile("VT323-Regular.ttf");
 		background.loadFromFile("Tetris Background.jpg");
 		S1.setTexture(background);
@@ -56,10 +61,15 @@ public:
 		}
 	}
 
+	int twoPlayerMenu();
+	void hostMenu();
+	void joinMenu();
+	int MainMenu();
 	int menuLoop();
+
+	
 
 
 };
-
 
 #endif
