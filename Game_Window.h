@@ -4,7 +4,7 @@
 #include "Game_Logic.h"
 #include "Main_Menu.h"
 
-class Game_Window : public Game_Logic,  Main_Menu
+class Game_Window : public Game_Logic, Main_Menu
 {
 private:
 	RenderWindow window;
@@ -16,17 +16,21 @@ private:
 	Event tetris;
 
 public:
-	
+
 	Game_Window() : Game_Logic(), Main_Menu()
 	{
 	}
 
+	void tick(int player);
+
 	void tick();
+	void input(int player);
 	void input();
 	void drawWorld(int);
 	void drawBlock(int);
 	void drawPoints(int);
-
+	void drawWorld(int,int, int);
+	void drawBlock(int, int, int);
 	void onePlayerGame();
 	void twoPlayerGame();
 
