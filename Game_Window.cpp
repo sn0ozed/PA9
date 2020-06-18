@@ -81,16 +81,16 @@ void Game_Window::input(int player)
 					cx--;
 					if (checkBlock(1) == false) cx++;
 				}
-				else if (tetris.key.code == Keyboard::Right)
+				if (tetris.key.code == Keyboard::Right)
 				{
 					cx++;
 					if (checkBlock(1) == false) cx--;
 				}
-				else if (tetris.key.code == Keyboard::Down)
+				if (tetris.key.code == Keyboard::Down)
 				{
 					fallDown(1);
 				}
-				else if (tetris.key.code == Keyboard::Up)
+				if (tetris.key.code == Keyboard::Up)
 				{
 					rotateBlock();
 					if (checkBlock(1) == false)
@@ -98,31 +98,35 @@ void Game_Window::input(int player)
 						rotateBlock(), rotateBlock(), rotateBlock();
 					}
 				}
-				else if (tetris.key.code == Keyboard::Space)
+				if (tetris.key.code == Keyboard::Space)
 				{
 					while (fallDown(1) == true);
 				}
-				else if (tetris.key.code == Keyboard::A)
+				if (tetris.key.code == Keyboard::A)
 				{
 					cxForClient--;
 					if (checkBlock(2) == false) cxForClient++;
 				}
-				else if (tetris.key.code == Keyboard::D)
+				if (tetris.key.code == Keyboard::D)
 				{
 					cxForClient++;
 					if (checkBlock(2) == false) cxForClient--;
 				}
-				else if (tetris.key.code == Keyboard::S)
+				if (tetris.key.code == Keyboard::S)
 				{
 					fallDown(2);
 				}
-				else if (tetris.key.code == Keyboard::W)
+				if (tetris.key.code == Keyboard::W)
 				{
 					rotateBlock(2);
 					if (checkBlock(2) == false)
 					{
 						rotateBlock(2), rotateBlock(2), rotateBlock(2);
 					}
+				}
+				if (tetris.key.code == Keyboard::Q)
+				{
+					while (fallDown(2) == true);
 				}
 			}
 		}
@@ -165,6 +169,24 @@ void Game_Window::input()
 		}
 	}
 }
+
+int Game_Window::getPoints(int player)
+{
+	int answer = 0;
+
+	switch (player)
+	{
+	case 1:
+		answer = point_num;
+		break;
+	case 2:
+		answer = point_num_client;
+		break;
+	}
+
+	return answer;
+}
+
 void Game_Window::drawWorld(int player, int moveX, int moveY)
 {
 	if (player == 1)
@@ -330,7 +352,7 @@ void Game_Window::drawPoints(int num)
 	switch (num)
 	{
 	case 1:
-		points1.setString(to_string(point_num));
+		points1.setString(to_string(getPoints(1)));
 		points1.setCharacterSize(50);
 		points1.setFillColor(Color::Red);
 		points1.setPosition(Vector2f(300, 40));
@@ -344,7 +366,7 @@ void Game_Window::drawPoints(int num)
 		window.draw(player1);
 		break;
 	case 2:
-		points2.setString(to_string(point_num_client));
+		points2.setString(to_string(getPoints(2)));
 		points2.setCharacterSize(50);
 		points2.setFillColor(Color::Red);
 		points2.setPosition(Vector2f(300 + 300 + 150, 40));

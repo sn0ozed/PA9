@@ -26,6 +26,7 @@ public:
 	void tick();
 	void input(int player);
 	void input();
+	virtual int getPoints(int);
 	void drawWorld(int);
 	void drawBlock(int);
 	void drawPoints(int);
