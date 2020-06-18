@@ -1,31 +1,43 @@
 #include "Game_Logic.h"
 
 
+//create new block
 void Game_Logic::newBlock()
 {
+	//get random shape of block
 	blockShape = rand() % 7, cx = widthCount / 2, cy = 0;
+	//update point number
 	point_num++;
+	// reduce duration 
 	dur -= .001;
 }
-
+//create new block with different player
 void Game_Logic::newBlock(int player)
 {
 	if (player == 1)
 	{
+		//get random shape of block
 		blockShape = rand() % 7, cx = widthCount / 2, cy = 0;
+		//update point number
 		point_num++;
+		// reduce duration 
 		dur -= .001;
 	}
 	else {
+		//get random shape of block
 		blockShapForClient = rand() % 7, cxForClient = widthCount / 2, cyForClient = 0;
+		//update point number
 		point_num_client++;
+		// reduce duration 
 		durForClient -= .001;
 	}
 }
+//check block is fallen down or close to the bind with different player
 bool Game_Logic::checkBlock(int player)
 {
 	if (player == 1)
 	{
+		//player1
 		for (int y = 0; y < 4; y++)for (int x = 0; x < 4; x++)
 		{
 			if (tetrisBlock[blockShape][y][x] == 0) continue;
@@ -36,6 +48,7 @@ bool Game_Logic::checkBlock(int player)
 	}
 	else
 	{
+		//player2
 		for (int y = 0; y < 4; y++)for (int x = 0; x < 4; x++)
 		{
 			if (tetrisBlock[blockShapForClient][y][x] == 0) continue;
@@ -47,7 +60,7 @@ bool Game_Logic::checkBlock(int player)
 
 }
 
-
+//check block is fallen down or close to the bind
 bool Game_Logic::checkBlock()
 {
 	for (int y = 0; y < 4; y++)for (int x = 0; x < 4; x++)
@@ -58,7 +71,7 @@ bool Game_Logic::checkBlock()
 	}
 	return true;
 }
-
+//clear the line if the line created by block with different player
 void Game_Logic::clearLine(int player)
 {
 	int to = heightCount - 1;
@@ -72,14 +85,14 @@ void Game_Logic::clearLine(int player)
 		{
 			for (int x = 0; x < widthCount; x++)worldForClient[to][x] = worldForClient[from][x];
 			to--;
-
+			//no space to fall, gameover
 			if (cyForClient == 0)
 				GameOverForClient = 1;
 		}
 		//otherwise clear the line
 	}
 }
-
+//clear the line if the line created by block 
 void Game_Logic::clearLine()
 {
 	int to = heightCount - 1;
@@ -93,17 +106,19 @@ void Game_Logic::clearLine()
 		{
 			for (int x = 0; x < widthCount; x++)world[to][x] = world[from][x];
 			to--;
-
+			//no space to fall, gameover
 			if (cy == 0)
 				GameOver = 1;
 		}
 		//otherwise clear the line
 	}
 }
+//fall down the bloack with different player
 bool Game_Logic::fallDown(int player)
 {
 	if (player == 1)
 	{
+		//position goes down
 		cy++;
 		if (checkBlock(player) == false) // hit bottom
 		{
@@ -113,7 +128,7 @@ bool Game_Logic::fallDown(int player)
 				{
 					world[cy + y][cx + x] = blockShape + 1; // +! is for avoidin zero
 				}
-
+			//clean the fall line
 			clearLine();
 			//start new block
 			newBlock(player);
@@ -122,6 +137,7 @@ bool Game_Logic::fallDown(int player)
 		return true;
 	}
 	else {
+		//position goes down
 		cyForClient++;
 		if (checkBlock(player) == false) // hit bottom
 		{
@@ -131,7 +147,7 @@ bool Game_Logic::fallDown(int player)
 				{
 					worldForClient[cyForClient + y][cxForClient + x] = blockShapForClient + 1; // +! is for avoidin zero
 				}
-
+			//clean the fall line
 			clearLine(player);
 			//start new block
 			newBlock(player);
@@ -140,8 +156,10 @@ bool Game_Logic::fallDown(int player)
 		return true;
 	}
 }
+//fall down the bloack 
 bool Game_Logic::fallDown()
 {
+	//position goes down
 	cy++;
 	if (checkBlock() == false) // hit bottom
 	{
@@ -151,7 +169,7 @@ bool Game_Logic::fallDown()
 			{
 				world[cy + y][cx + x] = blockShape + 1; // +! is for avoidin zero
 			}
-
+		//clean the fall line
 		clearLine();
 		//start new block
 		newBlock();
@@ -161,6 +179,7 @@ bool Game_Logic::fallDown()
 }
 
 
+//rotate the block with different player
 void Game_Logic::rotateBlock(int player)
 {
 	int len = 0; //check block size to make sure it can rotate
@@ -174,7 +193,7 @@ void Game_Logic::rotateBlock(int player)
 	for (int y = 0; y < 4; y++)for (int x = 0; x < 4; x++)
 		tetrisBlock[blockShapForClient][y][x] = d[y][x];
 }
-
+//rotate the block
 void Game_Logic::rotateBlock()
 {
 	int len = 0; //check block size to make sure it can rotate
@@ -188,7 +207,7 @@ void Game_Logic::rotateBlock()
 	for (int y = 0; y < 4; y++)for (int x = 0; x < 4; x++)
 		tetrisBlock[blockShape][y][x] = d[y][x];
 }
-
+//get the points of player1
 int Game_Logic::getPoints()
 {
 	return point_num;
